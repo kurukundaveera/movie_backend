@@ -24,7 +24,7 @@ public class Theatre implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer theatreId;
-	private String name;
+	private String theatreName;
 	private String area;
 	private Integer availableSeats;
 	private Double price;

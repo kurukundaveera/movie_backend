@@ -21,6 +21,9 @@ public class GlobalExceptionHandler {
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	
-	
+	@ExceptionHandler(MovieNotFoundException.class)
+	public ResponseEntity<ErrorResponse> breachNotFoundException(Exception e) {
+		return new ResponseEntity<>(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()),
+				HttpStatus.NOT_FOUND);
+	}
 }

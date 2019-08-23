@@ -32,8 +32,6 @@ public class TheatreDetailsServiceImpl implements TheatreDetailsService {
 	@Autowired
 	TheatreDetailsRepository theatreDetailsRepository;
 	
-	@Autowired
-	MovieDetailsRepository movieDetailsRepository;
 	
 	@Autowired
 	MovieTheatreRepository movieTheatreRepository;
@@ -60,7 +58,7 @@ public class TheatreDetailsServiceImpl implements TheatreDetailsService {
 			TheatreDetailsResponseByIdDto movieDetailsResponseDto = new TheatreDetailsResponseByIdDto();
 			movieDetailsResponseDto.setMovieId(movies.get(0).getMovieId());
 			movieDetailsResponseDto.setArea(theatre.get().getArea());
-			movieDetailsResponseDto.setName(theatre.get().getName());
+			movieDetailsResponseDto.setTheatreName(theatre.get().getTheatreName());
 			BeanUtils.copyProperties(b, movieDetailsResponseDto);
 			responseList.add(movieDetailsResponseDto);
 		});

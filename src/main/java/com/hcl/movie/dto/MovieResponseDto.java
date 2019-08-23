@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.hcl.movie.dto;
 
 import java.io.Serializable;
@@ -10,25 +7,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * @author Gurpreet Singh
- *
- */
-@Getter
 @Setter
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
-
-public class TheatreDetailsResponseByIdDto implements Serializable{
-
+@AllArgsConstructor
+public class MovieResponseDto implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	private Integer theatreId;
-	private String theatreName;
-	private String area;
 	private Integer movieId;
-
+	private String name;
+	private String lanuage;
+	private String movieType;
 }
