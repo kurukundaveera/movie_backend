@@ -21,7 +21,10 @@ import com.hcl.movie.repository.TheatreDetailsRepository;
  *
  */
 
+
+
 @RunWith(MockitoJUnitRunner.class)
+
 public class TheatreDetailsServiceTest {
 	
 	@InjectMocks
