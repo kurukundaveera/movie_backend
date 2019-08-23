@@ -15,6 +15,11 @@ public class GlobalExceptionHandler {
 				HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(NoBookingFoundException.class)
+	public ResponseEntity<ErrorResponse> noBookingFoundException(Exception e) {
+		return new ResponseEntity<>(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()),
+				HttpStatus.NOT_FOUND);
+	}
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleAllException(Exception e) {
 		return new ResponseEntity<>(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()),
