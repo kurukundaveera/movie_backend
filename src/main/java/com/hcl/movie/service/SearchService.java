@@ -7,9 +7,6 @@ import com.hcl.movie.dto.SearchResponseDto;
 
 public interface SearchService {
 
-//	List<SearchResponseDto> getMovies(String name);
 	List<SearchResponseDto> getMovies(SearchRequestDto serarchRequestDto);
-
-	
 
 }
