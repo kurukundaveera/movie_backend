@@ -37,7 +37,7 @@ public class BookServcieImpl implements BookService {
 
 	@Autowired
 	BookRepositoy bookRepository;
-	
+
 	@Autowired
 	EmailSender emailSender;
 
@@ -60,15 +60,15 @@ public class BookServcieImpl implements BookService {
 		if (!theatre.isPresent())
 			throw new CommonException("Theatre not exist");
 		if (bookRequestDto.getNumberOfSeats() > 3)
-			
+
 			throw new CommonException("More than 3 seats are not available to  book the tickets");
+		if (bookRequestDto.getNumberOfSeats() <= 0)
+			throw new CommonException("Invalid seat number");
 
 		Book bookDb = Book.builder().numberOfSeats(bookRequestDto.getNumberOfSeats())
-				.emailId(bookRequestDto.getEmailId())
-				.movieId(movie.get().getMovieId())
+				.emailId(bookRequestDto.getEmailId()).movieId(movie.get().getMovieId())
 				.theatreId(bookRequestDto.getTheatreId())
-				.totalPrice(bookRequestDto.getNumberOfSeats()*theatre.get().getPrice())
-				.build();
+				.totalPrice(bookRequestDto.getNumberOfSeats() * theatre.get().getPrice()).build();
 		Book book = bookRepository.save(bookDb);
 
 		if (bookRequestDto.getNumberOfSeats() > theatre.get().getAvailableSeats())
@@ -78,13 +78,13 @@ public class BookServcieImpl implements BookService {
 
 		theatre.get().setAvailableSeats(updateSeats);
 		thetreRepository.save(theatre.get());
-		
-		BookDto bookDto=new BookDto();
-		BeanUtils.copyProperties(book, bookDto);
-		
-		//emailSender.sendTicket(bookRequestDto.getEmailId(), bookDto);
 
-		return new BookResponseDto("Booking successfull:email sent" , book.getBookId());
+		BookDto bookDto = new BookDto();
+		BeanUtils.copyProperties(book, bookDto);
+
+		// emailSender.sendTicket(bookRequestDto.getEmailId(), bookDto);
+
+		return new BookResponseDto("Booking successfull:email sent", book.getBookId());
 	}
 
 }

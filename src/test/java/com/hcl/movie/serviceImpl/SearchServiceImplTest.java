@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.hcl.movie.dto.SearchRequestDto;
 import com.hcl.movie.dto.SearchResponseDto;
 import com.hcl.movie.entity.Movie;
 import com.hcl.movie.repository.MovieRepository;
@@ -29,8 +30,11 @@ public class SearchServiceImplTest {
 	Movie movie;
 	List<Movie> movieList;
 
+	SearchRequestDto searchRequestDto;
+
 	@Before
 	public void setUp() {
+
 		responseList = new ArrayList<>();
 		response = new SearchResponseDto();
 		movieList = new ArrayList<>();
@@ -42,13 +46,20 @@ public class SearchServiceImplTest {
 		response.setName("avengers");
 		responseList.add(response);
 
+		searchRequestDto = getSearchRequestDto();
+
 	}
 
 	@Test
 	public void testGetMovies() {
 		Mockito.when(movieRepository.findByNameStartsWithIgnoreCase(Mockito.anyString())).thenReturn(movieList);
-		List<SearchResponseDto> movieResponse = searchServiceImpl.getMovies("avengers");
+		List<SearchResponseDto> movieResponse = searchServiceImpl.getMovies(searchRequestDto);
 		Assert.assertEquals(responseList.get(0).getName(), movieResponse.get(0).getName());
 
 	}
+
+	public SearchRequestDto getSearchRequestDto() {
+		return new SearchRequestDto("aa");
+	}
+
 }

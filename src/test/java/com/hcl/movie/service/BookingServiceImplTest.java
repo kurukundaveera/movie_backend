@@ -19,7 +19,6 @@ import com.hcl.movie.dto.BookingResponseDto;
 import com.hcl.movie.entity.Book;
 import com.hcl.movie.entity.Movie;
 import com.hcl.movie.entity.Theatre;
-import com.hcl.movie.exception.MovieNotFoundException;
 import com.hcl.movie.exception.NoBookingFoundException;
 import com.hcl.movie.repository.BookRepositoy;
 import com.hcl.movie.repository.MovieRepository;
