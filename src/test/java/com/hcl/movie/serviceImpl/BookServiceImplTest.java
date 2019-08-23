@@ -17,6 +17,7 @@ import com.hcl.movie.dto.BookResponseDto;
 import com.hcl.movie.entity.Book;
 import com.hcl.movie.entity.Movie;
 import com.hcl.movie.entity.Theatre;
+import com.hcl.movie.exception.CommonException;
 import com.hcl.movie.repository.BookRepositoy;
 import com.hcl.movie.repository.MovieRepository;
 import com.hcl.movie.repository.TheatreRepository;
@@ -60,6 +61,31 @@ public class BookServiceImplTest {
 		BookResponseDto bokResponseDto=bookServiceImpl.book(bookRequestDto);
 		Assert.assertEquals("Booking successfull:email sent", bokResponseDto.getMessage());
 	}
+	
+	@Test(expected = CommonException.class)
+	public void createBookTest_1()
+	{
+		Mockito.when(movieRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+		bookServiceImpl.book(bookRequestDto);
+	}
+	
+	@Test(expected = CommonException.class)
+	public void createBookTest_2()
+	{
+		Mockito.when(movieRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(movie));
+		Mockito.when(thetreRepository.findById(Mockito.anyInt())).thenReturn(Optional.empty());
+		bookServiceImpl.book(bookRequestDto);
+	}
+	
+	@Test(expected = CommonException.class)
+	public void createBookTest_3()
+	{
+		Mockito.when(movieRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(movie));
+		Mockito.when(thetreRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(theatre));
+		bookRequestDto.setNumberOfSeats(4);
+		bookServiceImpl.book(bookRequestDto);
+	}
+	
 	
 	public Book getBook()
 	{
