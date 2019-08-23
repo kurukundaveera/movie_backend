@@ -19,7 +19,7 @@ import com.hcl.movie.service.BookService;
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 @RequestMapping("/api")
 public class BookController {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(BookController.class);
 
 	@Autowired
@@ -28,7 +28,7 @@ public class BookController {
 	@PostMapping("/book")
 	public ResponseEntity<BookResponseDto> createBook(@RequestBody BookRequestDto bookRequestDto) {
 		LOGGER.info("book controller");
-		return new ResponseEntity<BookResponseDto>(bookService.book(bookRequestDto), HttpStatus.CREATED);
+		return new ResponseEntity<>(bookService.book(bookRequestDto), HttpStatus.CREATED);
 
 	}
 
