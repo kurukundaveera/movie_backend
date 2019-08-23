@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hcl.movie.dto.SearchRequestDto;
 import com.hcl.movie.service.SearchService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,15 +25,18 @@ public class SearchControllerTest {
 	SearchController searchController;
 	MockMvc mockMvc;
 
+	SearchRequestDto searchRequestDto;
+
 	@Before
 	public void setUp() {
 		mockMvc = MockMvcBuilders.standaloneSetup(searchController).build();
+		searchRequestDto = getSearchRequestDto();
 	}
 
 	@Test
 	public void testGetMovies() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/api/search/{name}","avengers")
-				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+		mockMvc.perform(MockMvcRequestBuilders.post("/api/search").contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON).content(asJsonString(searchRequestDto))).andExpect(status().isOk());
 
 	}
 
@@ -43,6 +47,10 @@ public class SearchControllerTest {
 			throw new RuntimeException(e);
 		}
 
+	}
+
+	public SearchRequestDto getSearchRequestDto() {
+		return new SearchRequestDto("aa");
 	}
 
 }

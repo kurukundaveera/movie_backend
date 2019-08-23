@@ -8,11 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hcl.movie.dto.SearchRequestDto;
 import com.hcl.movie.dto.SearchResponseDto;
 import com.hcl.movie.service.SearchService;
 
@@ -24,10 +25,10 @@ public class SearchController {
 	@Autowired
 	SearchService searchService;
 
-	@GetMapping("/search/{name}")
-	public ResponseEntity<List<SearchResponseDto>> getMovies(@PathVariable String name) {
+	@PostMapping("/search")
+	public ResponseEntity<List<SearchResponseDto>> getMovies(@RequestBody SearchRequestDto serarchRequestDto ) {
 		logger.info("search movies");
-		List<SearchResponseDto> response = searchService.getMovies(name);
+		List<SearchResponseDto> response = searchService.getMovies(serarchRequestDto);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 
 	}
