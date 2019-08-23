@@ -10,7 +10,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import com.hcl.movie.dto.BookDto;
-import com.hcl.movie.entity.Book;
 
 @Component
 public class EmailSender {

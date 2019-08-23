@@ -2,6 +2,8 @@ package com.hcl.movie.service;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ import com.hcl.movie.util.EmailSender;
  */
 @Service
 public class BookServcieImpl implements BookService {
+	private static Logger logger = LoggerFactory.getLogger(BookServcieImpl.class);
 
 	@Autowired
 	MovieRepository movieRepository;
@@ -49,6 +52,7 @@ public class BookServcieImpl implements BookService {
 
 	@Override
 	public BookResponseDto book(BookRequestDto bookRequestDto) {
+		logger.info("Enter th create booking serce impl");
 		Optional<Movie> movie = movieRepository.findById(bookRequestDto.getMovieId());
 		Optional<Theatre> theatre = thetreRepository.findById(bookRequestDto.getTheatreId());
 		if (!movie.isPresent())
@@ -80,7 +84,7 @@ public class BookServcieImpl implements BookService {
 		
 		emailSender.sendTicket(bookRequestDto.getEmailId(), bookDto);
 
-		return new BookResponseDto("Successfully booked" , book.getBookId());
+		return new BookResponseDto("Booking successfull:email sent" , book.getBookId());
 	}
 
 }
