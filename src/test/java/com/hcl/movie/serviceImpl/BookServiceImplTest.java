@@ -3,29 +3,39 @@ package com.hcl.movie.serviceImpl;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import com.hcl.movie.dto.BookRequestDto;
+import com.hcl.movie.dto.BookResponseDto;
 import com.hcl.movie.entity.Book;
 import com.hcl.movie.entity.Movie;
 import com.hcl.movie.entity.Theatre;
+import com.hcl.movie.repository.BookRepositoy;
 import com.hcl.movie.repository.MovieRepository;
 import com.hcl.movie.repository.TheatreRepository;
+import com.hcl.movie.service.BookServcieImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookServiceImplTest {
 	
 	@Mock
-	MovieRepository movieRepository;
-	
+	MovieRepository movieRepository;	
 	
 	@Mock
 	TheatreRepository thetreRepository;
+	
+	@Mock
+	BookRepositoy bookRepository;
+	
+	@InjectMocks
+	BookServcieImpl bookServiceImpl;
 	
 	Book book;
 	BookRequestDto bookRequestDto;
@@ -45,7 +55,10 @@ public class BookServiceImplTest {
 	public void createBookTest()
 	{
 		Mockito.when(movieRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(movie));
-		Mockito.when(movieRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(movie));
+		Mockito.when(thetreRepository.findById(Mockito.anyInt())).thenReturn(Optional.of(theatre));
+		Mockito.when(bookRepository.save(Mockito.any())).thenReturn(book);
+		BookResponseDto bokResponseDto=bookServiceImpl.book(bookRequestDto);
+		Assert.assertEquals("Booking successfull:email sent", bokResponseDto.getMessage());
 	}
 	
 	public Book getBook()
@@ -55,7 +68,7 @@ public class BookServiceImplTest {
 	
 	public BookRequestDto getBookRequestDto()
 	{
-		return new BookRequestDto(1, 1, "h@gmail.com", 4);
+		return new BookRequestDto(1, 1, "h@gmail.com", 3);
 	}
 	
 	public Movie getMovie()
