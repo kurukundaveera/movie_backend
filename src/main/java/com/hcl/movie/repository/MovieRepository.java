@@ -9,6 +9,8 @@ import com.hcl.movie.entity.Movie;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
+	
+	
 
 	List<Movie> findByNameStartsWithIgnoreCase(String name);
 
