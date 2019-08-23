@@ -11,6 +11,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import com.hcl.movie.dto.MovieResponseDto;
 import com.hcl.movie.entity.Movie;
+import com.hcl.movie.exception.MovieNotFoundException;
 import com.hcl.movie.repository.MovieRepository;
 @RunWith(MockitoJUnitRunner.class)
 
@@ -34,5 +35,10 @@ public class MovieServiceImplTest {
 		Mockito.when(movieRepository.findAll()).thenReturn(movieList);
 		List<MovieResponseDto> response = movieServiceImpl.getAllMovies();	
 		Assert.assertEquals("Rockstar", response.get(0).getName());
+	}
+	
+	@Test(expected = MovieNotFoundException.class)
+	public void getAllMoviesTest_1() {
+		movieServiceImpl.getAllMovies();
 	}
 }
