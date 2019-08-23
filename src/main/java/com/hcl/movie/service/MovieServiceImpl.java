@@ -15,11 +15,12 @@ import com.hcl.movie.exception.MovieNotFoundException;
 import com.hcl.movie.repository.MovieRepository;
 
 @Service
-public class MovieServiceImpl implements MovieService{
+public class MovieServiceImpl implements MovieService {
 
 	private static Logger logger = LoggerFactory.getLogger(MovieServiceImpl.class);
-	@Autowired MovieRepository movieRepository;
-	
+	@Autowired
+	MovieRepository movieRepository;
+
 	/*
 	 * this method is written to get all the movies list.
 	 */
@@ -28,12 +29,12 @@ public class MovieServiceImpl implements MovieService{
 		logger.info("inside the getAllMovies method");
 		List<MovieResponseDto> responseList = new ArrayList<>();
 		List<Movie> movieList = movieRepository.findAll();
-		if(movieList.isEmpty()) 
+		if (movieList.isEmpty())
 			throw new MovieNotFoundException("Movie not found");
-//		else
-			movieList.stream().forEach(c ->{
-				MovieResponseDto response = new MovieResponseDto();
-			BeanUtils.copyProperties(c,response);
+
+		movieList.stream().forEach(c -> {
+			MovieResponseDto response = new MovieResponseDto();
+			BeanUtils.copyProperties(c, response);
 			responseList.add(response);
 		});
 		return responseList;
