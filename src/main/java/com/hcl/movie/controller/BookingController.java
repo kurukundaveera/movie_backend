@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.movie.dto.BookingResponseDto;
+import com.hcl.movie.exception.NoBookingFoundException;
 import com.hcl.movie.service.BookingServiceImpl;
 
 /**
  * @author Gurpreet Singh
+ * 
+ * This is the controller class for boooking summary
  *
  */
 @RestController
@@ -30,6 +33,18 @@ public class BookingController {
 	@Autowired
 	BookingServiceImpl bookingServiceImpl;
 	
+	
+	/**
+	 * This method is use to get booking summary
+	 * 
+	 * @param Integer bookingId is the input parameter
+	 * @return BookingResponseDto is the output which includes movieName,
+	 *         numberOfSeats bookingDate, name, totalPrice, emailId
+	 * @exception NoBookingFoundException if no booking found MovieNotFoundException
+	 *                                    if no movie found MovieNotFoundException
+	 *                                    if no theatre found
+	 * 
+	 */
 	@GetMapping("/booking/{bookingId}")
 	public ResponseEntity<BookingResponseDto> getBookingsummary(@PathVariable Integer bookingId)
 	{

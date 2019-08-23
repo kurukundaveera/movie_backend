@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.movie.dto.TheatreDetailsResponseByIdDto;
+import com.hcl.movie.exception.NoMoviePresentException;
 import com.hcl.movie.service.TheatreDetailsServiceImpl;
 
 /**
@@ -34,6 +35,14 @@ public class TheatreDetailsController {
 	@Autowired
 	TheatreDetailsServiceImpl movieDetailsServiceImpl;
 
+	/**
+	 * This method is use to get the movie details by passing the movieId
+	 * 
+	 * @param Integer movieId
+	 * @return MovieDetailsResponseByIdDto which includes theatreId, name area,
+	 *         movieId.
+	 * @exception NoMoviePresentException if no movie is found.
+	 */
 	
 	@GetMapping("/movieDetails/{movieId}")
 	public ResponseEntity<List<TheatreDetailsResponseByIdDto>> getTheatreDetailsById(@PathVariable Integer movieId) {
