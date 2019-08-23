@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hcl.movie.dto.SearchResponseDto;
 import com.hcl.movie.service.SearchService;
 
+/**
+ * 
+ * @author DeepikaSivarajan
+ *
+ */
 @RestController
 @CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 @RequestMapping("/api")
@@ -23,6 +28,14 @@ public class SearchController {
 	private static Logger logger = LoggerFactory.getLogger("SearchController.class");
 	@Autowired
 	SearchService searchService;
+
+	/**
+	 * 
+	 * This method is intended to search movie names(like search)
+	 * 
+	 * @param movieName is the input request
+	 * @return it returns SearchResponseDto list
+	 */
 
 	@GetMapping("/search/{name}")
 	public ResponseEntity<List<SearchResponseDto>> getMovies(@PathVariable String name) {
