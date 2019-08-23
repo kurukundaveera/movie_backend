@@ -1,6 +1,7 @@
 package com.hcl.movie.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Movie implements Serializable {
+public class Book implements Serializable {
 
 	/**
 	 * 
@@ -23,9 +24,11 @@ public class Movie implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer bookId;
+	private Integer numberOfSeats;
+	private Double totalPrice;
 	private Integer movieId;
-	private String name;
-	private String lanuage;
-	private String movieType;
+	private LocalDate bookingDate;
+	private LocalDate movieDate;
 
 }

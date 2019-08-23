@@ -15,7 +15,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Movie implements Serializable {
+public class MovieTheatre implements Serializable {
 
 	/**
 	 * 
@@ -23,9 +23,8 @@ public class Movie implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer movieTheatreId;
+	private Integer theatreId;
 	private Integer movieId;
-	private String name;
-	private String lanuage;
-	private String movieType;
 
 }
