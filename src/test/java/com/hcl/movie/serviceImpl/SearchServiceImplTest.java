@@ -15,6 +15,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import com.hcl.movie.dto.SearchRequestDto;
 import com.hcl.movie.dto.SearchResponseDto;
 import com.hcl.movie.entity.Movie;
+import com.hcl.movie.exception.MovieNotFoundException;
 import com.hcl.movie.repository.MovieRepository;
 import com.hcl.movie.service.SearchServiceImpl;
 
@@ -56,6 +57,11 @@ public class SearchServiceImplTest {
 		List<SearchResponseDto> movieResponse = searchServiceImpl.getMovies(searchRequestDto);
 		Assert.assertEquals(responseList.get(0).getName(), movieResponse.get(0).getName());
 
+	}
+	
+	@Test(expected = MovieNotFoundException.class)
+	public void testGetMovies_1() {
+		searchServiceImpl.getMovies(searchRequestDto);
 	}
 
 	public SearchRequestDto getSearchRequestDto() {
