@@ -82,7 +82,7 @@ public class BookServcieImpl implements BookService {
 		BookDto bookDto=new BookDto();
 		BeanUtils.copyProperties(book, bookDto);
 		
-		emailSender.sendTicket(bookRequestDto.getEmailId(), bookDto);
+		//emailSender.sendTicket(bookRequestDto.getEmailId(), bookDto);
 
 		return new BookResponseDto("Booking successfull:email sent" , book.getBookId());
 	}
