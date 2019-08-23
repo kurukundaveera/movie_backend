@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hcl.movie.dto.SearchRequestDto;
 import com.hcl.movie.dto.SearchResponseDto;
 import com.hcl.movie.entity.Movie;
 import com.hcl.movie.exception.MovieNotFoundException;
@@ -34,10 +35,10 @@ public class SearchServiceImpl implements SearchService {
 	 */
 
 	@Override
-	public List<SearchResponseDto> getMovies(String name) {
+	public List<SearchResponseDto> getMovies(SearchRequestDto serarchRequestDto ) {
 
 		List<SearchResponseDto> responseList = new ArrayList<>();
-		List<Movie> movie = movieRepository.findByNameStartsWithIgnoreCase(name);
+		List<Movie> movie = movieRepository.findByNameStartsWithIgnoreCase(serarchRequestDto.getName());
 		if (movie.isEmpty()) {
 			throw new MovieNotFoundException("Movies not found");
 		} else {
