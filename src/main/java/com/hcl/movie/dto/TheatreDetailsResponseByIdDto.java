@@ -14,12 +14,12 @@ import lombok.Setter;
  * @author Gurpreet Singh
  *
  */
-//@Getter
-//@Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
-public class MovieDetailsResponseByIdDto implements Serializable{
+public class TheatreDetailsResponseByIdDto implements Serializable{
 
 	/**
 	 * 
@@ -27,6 +27,8 @@ public class MovieDetailsResponseByIdDto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer theatreId;
-//	private 
+	private String name;
+	private String area;
+	private Integer movieId;
 
 }
